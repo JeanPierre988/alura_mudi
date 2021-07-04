@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{ base :: head}"></head>
+<body>
+<div th:replace="~{ base :: logo }"></div>
+<div class="container">
+    <div th:replace="~{ base :: titulo('Novo Produto')}"></div>
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+        <div class="container-fluid pl-3 pr-3">
+            <a class="navbar-brand" href="#">Mudi</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Todos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Aguardando</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Aprovado</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Entregue</a>
+                    </li>
+                </ul>
+                <a href="/pedido/formulario">
+                    <button class="btn btn-outline-light my-2 my-sm-0">Novo</button>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <div class="card mt-3">
+        <form th:object="${requisicaoNovoPedido}" action="/pedido/novo" method="POST" class="card-body">
+            <div class="form-group">
+                <label for="nomeProduto">Produto</label>
+                <input th:field="*{nomeProduto}" th:errorclass="is-invalid" class="form-control" placeholder="nome do produto"/>
+                <small>Informe qual o nome do produto.</small>
+                <div th:errors="*{nomeProduto}" class="invalid-feedback">
+                    Erros no nome do Produto
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="urlProduto">URL</label>
+                <input th:field="*{urlProduto}" th:errorclass="is-invalid" class="form-control" placeholder="URL do produto"/>
+                <small>Procure em um site o produto que você deseja e cole a URL da página aqui.</small>
+                <div th:errors="*{urlProduto}" class="invalid-feedback">
+                    Erros na URL do Produto
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="urlImagem">Imagem</label>
+                <input th:field="*{urlImagem}" th:errorclass="is-invalid" class="form-control" placeholder="URL da imagem"/>
+                <small>Copie a URL de uma boa imagem do produto e cole aqui para ajudar a conseguir compradores.</small>
+                <div th:errors="*{urlImagem}" class="invalid-feedback">
+                    Erros na URL da Imagem
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição</label>
+                <textarea th:field="*{descricao}" th:errorclass="is-invalid" class="form-control"
+                          placeholder="Adicione detalhes importantes para ajudar o comprador"></textarea>
+                <div th:errors="*{descricao}" class="invalid-feedback">
+                    Erros na Descrição
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Cadastrar</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

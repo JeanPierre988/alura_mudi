@@ -14,12 +14,17 @@
             font-family:'Handlee', cursive;
             font-size: 2.5rem;
         }
+
     </style>
 </head>
 
 <div th:fragment="logo" class="d-flex justify-content-between logo-container mb-3 p-3">
     <span class="logo">Mudi</span>
-    <span>Login</span>
+    <span class="mt-3">
+        <a href="/login" class="text-light" sec:authorize="!isAuthenticated()">login</a>
+        <a onclick="document.querySelector('#form-login').submit()" href="#" class="text-light" sec:authorize="isAuthenticated()">logout</a>
+        <form id="form-login" th:action="@{/logout}" method="post"></form>
+    </span>
 </div>
 
 <div th:fragment="titulo(valor)" class="container-fluid bg-dark text-light p-5">

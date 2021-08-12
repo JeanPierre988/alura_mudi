@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Locale;
 
@@ -25,8 +26,8 @@ public class HomeController {
     private PedidoRepository repository;
 
     @GetMapping
-    public String home(Model model){
-        List<Pedido> result = repository.findAll();
+    public String home(Model model, Principal principal){
+        List<Pedido> result = repository.findAllByUser(principal.getName());
         model.addAttribute ("pedidos", result);
         return "home";
     }

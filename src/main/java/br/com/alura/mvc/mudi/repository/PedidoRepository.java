@@ -2,6 +2,7 @@ package br.com.alura.mvc.mudi.repository;
 
 import br.com.alura.mvc.mudi.model.Pedido;
 import br.com.alura.mvc.mudi.model.StatusPedido;
+import br.com.alura.mvc.mudi.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -16,4 +17,7 @@ public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
 
     @Query("SELECT p FROM Pedido p JOIN p.user u WHERE u.username = :username")
     List<Pedido> findAllByUser(@Param("username") String username);
+
+    @Query("SELECT p FROM Pedido p JOIN p.user u WHERE u.username = :username AND p.status = :status")
+    List<Pedido> findByStatusAndUser(@Param("status") StatusPedido status, @Param("username") String user);
 }

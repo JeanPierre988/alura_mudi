@@ -3,6 +3,10 @@ package br.com.alura.mvc.mudi.repository;
 import br.com.alura.mvc.mudi.model.Pedido;
 import br.com.alura.mvc.mudi.model.StatusPedido;
 import br.com.alura.mvc.mudi.model.User;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -13,7 +17,9 @@ import java.util.List;
 
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
-    List<Pedido> findByStatus(StatusPedido status);
+
+    @Cacheable("pedidos")
+    List<Pedido> findByStatus(StatusPedido status, Pageable sort);
 
     @Query("SELECT p FROM Pedido p JOIN p.user u WHERE u.username = :username")
     List<Pedido> findAllByUser(@Param("username") String username);

@@ -23,23 +23,25 @@ public class UsuarioController {
     private PedidoRepository repository;
 
     @GetMapping("pedido")
-    public String home(Model model, Principal principal){
+    public String home(Model model, Principal principal) {
         List<Pedido> result = repository.findAllByUser(principal.getName());
-        model.addAttribute ("pedidos", result);
+        model.addAttribute("pedidos", result);
+        model.addAttribute("user", principal.getName());
         return "usuario/home";
     }
 
     @GetMapping("pedido/{status}")
-    public String byStatus(@PathVariable("status") String status, Model model, Principal principal){
+    public String byStatus(@PathVariable("status") String status, Model model, Principal principal) {
         List<Pedido> result = repository
                 .findByStatusAndUser(StatusPedido.valueOf(status.toUpperCase(Locale.ROOT)), principal.getName());
         model.addAttribute("status", status);
-        model.addAttribute ("pedidos", result);
+        model.addAttribute("pedidos", result);
+        model.addAttribute("user", principal.getName());
         return "usuario/home";
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public String onError(){
+    public String onError() {
         return "redirect:/usuario/home";
     }
 }

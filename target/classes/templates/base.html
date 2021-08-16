@@ -14,17 +14,23 @@
             /*font-family:'Handlee', cursive;*/
             font-size: 2rem;
         }
+
     </style>
 </head>
 
-<div th:fragment="logo" >
+<div th:fragment="logo">
     <div class="logo-container d-flex justify-content-between p-3">
         <span class="logo ml-2">Mudi</span>
         <span>
-            <a href="/login" class="text-light" sec:authorize="!isAuthenticated()">login</a>
-            <a onclick="document.querySelector('#form-login').submit()" href="#" class="text-light"
-               sec:authorize="isAuthenticated()">logout</a>
-            <form id="form-login" th:action="@{/logout}" method="post"></form>
+            <div sec:authorize="!isAuthenticated()">
+                <a href="/login" class="text-light">login</a>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                <span th:text="${user}">USER</span>
+                <a onclick="document.querySelector('#form-login').submit()" href="#" class="text-light"
+                   >logout</a>
+                <form id="form-login" th:action="@{/logout}" method="post"></form>
+            </div>
         </span>
     </div>
     <div class="row">

@@ -16,6 +16,7 @@
                         <a th:classappend="${status} == 'aguardando' ? 'active'" class="nav-link" th:href="@{/usuario/pedido/aguardando}">Aguardando</a>
                     </li>
                     <li class="nav-item">
+                        <aside>
                         <a th:classappend="${status} == 'aprovado' ? 'active'" class="nav-link" th:href="@{/usuario/pedido/aprovado}" tabindex="-1" aria-disabled="true">Aprovado</a>
                     </li>
                     <li class="nav-item">

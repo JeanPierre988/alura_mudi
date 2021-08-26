@@ -18,6 +18,7 @@ public class Pedido {
     private String urlProduto;
     private String urlImagemProduto;
     private String descricaoProduto;
+
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
 
@@ -26,6 +27,7 @@ public class Pedido {
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Oferta> ofertas;
 
     public User getUser() {

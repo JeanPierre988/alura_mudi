@@ -24,7 +24,7 @@ public class HomeController {
     @GetMapping
     public String home(Model model, Principal principal){
         Sort sort = Sort.by("dataEntregaProduto").descending();
-        PageRequest pageable = PageRequest.of(1, 1, sort);
+        PageRequest pageable = PageRequest.of(1, 5, sort);
 
         StatusPedido status = StatusPedido.ENTREGUE;
 
